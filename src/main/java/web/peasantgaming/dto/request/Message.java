@@ -31,28 +31,32 @@ public class Message {
     @JsonProperty("tool_calls")
     private Object toolCalls;
     @JsonProperty("content")
-    private GameInfo content;
+    private String content;
 
-    private String contents;
+    private GameInfo gameinfoContent;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
-    public Message(String role, GameInfo content) {
+    public Message(String role, GameInfo gameinfoContent) {
+        this.role = role;
+        this.gameinfoContent = gameinfoContent;
+    }
+
+    public Message(String role, String content) {
         this.role = role;
         this.content = content;
     }
 
-    public Message(String role, String contents) {
-        this.role = role;
-        this.contents = contents;
+    public Message() {}
+    @JsonProperty("content")
+    public String getContent() {
+        return content;
     }
 
-    public String getContents() {
-        return contents;
-    }
-
-    public void setContents(String contents) {
-        this.contents = contents;
+    @JsonProperty("content")
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @JsonProperty("role")
@@ -75,14 +79,14 @@ public class Message {
         this.toolCalls = toolCalls;
     }
 
-    @JsonProperty("content")
-    public GameInfo getContent() {
-        return content;
+
+    public GameInfo getGameinfoContentContent() {
+        return gameinfoContent;
     }
 
-    @JsonProperty("content")
-    public void setContent(GameInfo content) {
-        this.content = content;
+
+    public void setGameinfoContentContent(GameInfo gameinfoContent) {
+        this.gameinfoContent = gameinfoContent;
     }
 
     @JsonAnyGetter

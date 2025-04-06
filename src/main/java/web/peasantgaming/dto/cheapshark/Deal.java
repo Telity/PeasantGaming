@@ -1,18 +1,18 @@
 package web.peasantgaming.dto.cheapshark;
 
 public class Deal {
-    private String storeID;
+    private int storeID;
     private String dealID;
     private String price;
     private String retailPrice;
     private String savings;
 
     // Getters and Setters
-    public String getStoreID() {
+    public int getStoreID() {
         return storeID;
     }
 
-    public void setStoreID(String storeID) {
+    public void setStoreID(int storeID) {
         this.storeID = storeID;
     }
 

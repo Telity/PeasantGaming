@@ -18,8 +18,8 @@ public class PeasentGamingController {
         this.peasentGamingService = peasentGamingService;
     }
 
-    @GetMapping("/game")
+    @PostMapping("/game")
     public List<RecommandationsDto> game(@RequestBody FrontEndRequestDto frontEndRequestDto) {
-
+        return peasentGamingService.recommendGames(frontEndRequestDto);
     }
 }
