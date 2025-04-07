@@ -1,9 +1,12 @@
 package web.peasantgaming.dto.cheapshark;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class CsStoreList {
 
+    @JsonProperty(value = "")
     private List<CsStore> storeList;
 
     public CsStoreList(List<CsStore> storeList) {
