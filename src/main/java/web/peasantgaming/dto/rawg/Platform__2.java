@@ -1,5 +1,5 @@
 
-package web.peasantgaming.dto;
+package web.peasantgaming.dto.rawg;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,11 +16,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "name",
     "slug",
+    "image",
+    "year_end",
+    "year_start",
     "games_count",
     "image_background"
 })
 @Generated("jsonschema2pojo")
-public class Publisher {
+public class Platform__2 {
 
     @JsonProperty("id")
     private Integer id;
@@ -28,6 +31,12 @@ public class Publisher {
     private String name;
     @JsonProperty("slug")
     private String slug;
+    @JsonProperty("image")
+    private Object image;
+    @JsonProperty("year_end")
+    private Object yearEnd;
+    @JsonProperty("year_start")
+    private Object yearStart;
     @JsonProperty("games_count")
     private Integer gamesCount;
     @JsonProperty("image_background")
@@ -63,6 +72,36 @@ public class Publisher {
     @JsonProperty("slug")
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    @JsonProperty("image")
+    public Object getImage() {
+        return image;
+    }
+
+    @JsonProperty("image")
+    public void setImage(Object image) {
+        this.image = image;
+    }
+
+    @JsonProperty("year_end")
+    public Object getYearEnd() {
+        return yearEnd;
+    }
+
+    @JsonProperty("year_end")
+    public void setYearEnd(Object yearEnd) {
+        this.yearEnd = yearEnd;
+    }
+
+    @JsonProperty("year_start")
+    public Object getYearStart() {
+        return yearStart;
+    }
+
+    @JsonProperty("year_start")
+    public void setYearStart(Object yearStart) {
+        this.yearStart = yearStart;
     }
 
     @JsonProperty("games_count")

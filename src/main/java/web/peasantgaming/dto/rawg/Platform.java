@@ -1,5 +1,5 @@
 
-package web.peasantgaming.dto;
+package web.peasantgaming.dto.rawg;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,21 +14,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "id",
-    "title",
-    "count",
-    "percent"
+    "name",
+    "slug"
 })
 @Generated("jsonschema2pojo")
-public class Rating {
+public class Platform {
 
     @JsonProperty("id")
     private Integer id;
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("count")
-    private Integer count;
-    @JsonProperty("percent")
-    private Double percent;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("slug")
+    private String slug;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
@@ -42,34 +39,24 @@ public class Rating {
         this.id = id;
     }
 
-    @JsonProperty("title")
-    public String getTitle() {
-        return title;
+    @JsonProperty("name")
+    public String getName() {
+        return name;
     }
 
-    @JsonProperty("title")
-    public void setTitle(String title) {
-        this.title = title;
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @JsonProperty("count")
-    public Integer getCount() {
-        return count;
+    @JsonProperty("slug")
+    public String getSlug() {
+        return slug;
     }
 
-    @JsonProperty("count")
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    @JsonProperty("percent")
-    public Double getPercent() {
-        return percent;
-    }
-
-    @JsonProperty("percent")
-    public void setPercent(Double percent) {
-        this.percent = percent;
+    @JsonProperty("slug")
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
     @JsonAnyGetter
