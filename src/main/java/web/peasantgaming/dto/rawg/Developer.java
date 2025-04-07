@@ -1,5 +1,4 @@
-
-package web.peasantgaming.dto;
+package web.peasantgaming.dto.rawg;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,14 +12,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "id",
-    "name",
-    "slug",
-    "games_count",
-    "image_background"
+        "id",
+        "name",
+        "slug",
+        "games_count",
+        "image_background"
 })
 @Generated("jsonschema2pojo")
-public class Genre {
+public class Developer {
 
     @JsonProperty("id")
     private Integer id;
