@@ -13,11 +13,11 @@ public class CheapSharkService {
 
     @Autowired
     public CheapSharkService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.build()   ;
+        this.webClient = webClientBuilder.baseUrl("https://www.cheapshark.com/api/1.0").build();
     }
 
     public Mono<String> fetchFromCheapShark(Integer id){
-        String Url = "https://www.cheapshark.com/api/1.0/games?id=" + id + "?limit=5";
+        String Url = "games?id=" + id + "?limit=5";
 
         return webClient.get()
                 .uri(Url)

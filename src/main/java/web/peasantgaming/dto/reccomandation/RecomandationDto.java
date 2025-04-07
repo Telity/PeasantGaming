@@ -14,18 +14,18 @@ public class RecomandationDto {
     private String picture;
     private String description;
     private List<ParentPlatform> platform;
-    private List<String> storenames;
+    private List<String> storeNames;
 
     public RecomandationDto() {}
 
-    public RecomandationDto(String name,List<Genre> genre,List<Object> dealList,String picture,String description,List<ParentPlatform> platform,List<String> storenames) {
+    public RecomandationDto(String name,List<Genre> genre,List<Object> dealList,String picture,String description,List<ParentPlatform> platform,List<String> storeNames) {
         this.name = name;
         this.genre = genre;
         this.dealList = dealList;
         this.picture = picture;
         this.description = description;
         this.platform = platform;
-        this.storenames = storenames;
+        this.storeNames = storeNames;
     }
 
     public String getName() {
@@ -76,11 +76,11 @@ public class RecomandationDto {
         this.platform = platform;
     }
 
-    public List<String> getStorenames() {
-        return storenames;
+    public List<String> getStoreNames() {
+        return storeNames;
     }
 
-    public void setStorenames(List<String> storenames) {
-        this.storenames = storenames;
+    public void setStoreNames(List<String> storeNames) {
+        this.storeNames = storeNames;
     }
 }
