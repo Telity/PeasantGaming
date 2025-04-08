@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import web.peasantgaming.dto.rawg.GameInfo;
+import web.peasantgaming.dto.rawg.GameInfoDto;
 import web.peasantgaming.dto.rawg.Genre;
 import web.peasantgaming.dto.rawg.ParentPlatform;
 import web.peasantgaming.dto.reccomandation.RecomandationDto;
@@ -27,15 +27,15 @@ public class RawgService {
     @Value("${api.key}")
     String api_key;
 
-    public List<GameInfo> getRawgGame(List<String> games){
+    public List<GameInfoDto> getRawgGame(List<String> games){
 
-        List<GameInfo> rawgGames = new ArrayList<>();
+        List<GameInfoDto> rawgGames = new ArrayList<>();
 
         for(String game : games) {
-            Mono<GameInfo> gameInfo = webClient.get()
+            Mono<GameInfoDto> gameInfo = webClient.get()
                     .uri("https://api.rawg.io/api/games/" + game + "?key=" + api_key)
                     .retrieve()
-                    .bodyToMono(GameInfo.class);
+                    .bodyToMono(GameInfoDto.class);
             rawgGames.add(gameInfo.block());
         }
 
@@ -44,11 +44,11 @@ public class RawgService {
 
     public List<RecomandationDto> recomandations(List<String> games){
 
-        List<GameInfo> gameInfos = getRawgGame(games);
+        List<GameInfoDto> gameInfos = getRawgGame(games);
         List<RecomandationDto> recomandations = new ArrayList<>();
 
 
-        for(GameInfo gameInfo : gameInfos) {
+        for(GameInfoDto gameInfo : gameInfos) {
 
             //List<SimplifiedCheapSharkDTO> cheapSharkData = cheapSharkService.
             //List<String> storeNames = new Arraylist<>();

@@ -3,7 +3,7 @@ package web.peasantgaming.controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import web.peasantgaming.dto.rawg.GameInfo;
+import web.peasantgaming.dto.rawg.GameInfoDto;
 import web.peasantgaming.dto.reccomandation.RecomandationDto;
 import web.peasantgaming.service.RawgService;
 

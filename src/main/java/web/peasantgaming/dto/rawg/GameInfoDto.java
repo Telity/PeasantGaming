@@ -71,7 +71,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "description_raw"
 })
 @Generated("jsonschema2pojo")
-public class GameInfo {
+public class GameInfoDto {
 
     @JsonProperty("id")
     private Integer id;
