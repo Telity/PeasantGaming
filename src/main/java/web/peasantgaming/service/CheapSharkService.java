@@ -21,10 +21,10 @@ public class CheapSharkService {
         this.webClient = webClientBuilder.baseUrl("https://www.cheapshark.com/api/1.0").build();
     }
 
-    public String getCheapSharkIdFromTitel(String title){
+    public String getCheapSharkIdFromTitle(String title){
         GameId[] gameId = webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("games")
+                        .path("/games")
                         .queryParam("title", title)
                         .build())
                 .retrieve()
@@ -38,9 +38,9 @@ public class CheapSharkService {
     }
 
 
-    public List<SimplifiedCheapSharkDTO> get5CheapestStoresByTitel(String title){
+    public List<SimplifiedCheapSharkDTO> get5CheapestStoresByTitle(String title){
 
-        String gameId = getCheapSharkIdFromTitel(title);
+        String gameId = getCheapSharkIdFromTitle(title);
         if(gameId == null){
             return Collections.emptyList();
         }
@@ -57,7 +57,7 @@ public class CheapSharkService {
 
         SharkDTO sharkDTO = webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/deals")
+                        .path("/games")
                         .queryParam("id", gameId)
                         .build())
                 .retrieve()
