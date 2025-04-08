@@ -25,18 +25,19 @@ public class MistralService {
     @Value("${mistral.api.key}")
     private String mistralApiKey;
 
-    public Choice getChoice() {
-        Choice choice =new Choice();
+    public Choice getChoice(Message message) {
+        Choice choice =null;
     try {
         RequestDTO requestDTO = new RequestDTO();
         requestDTO.setModel("mistral-small-latest");
         requestDTO.setTemperature(1.0);
         requestDTO.setMaxTokens(400);
 
-        Message message = new Message();
         List<Message> lstMessages = new ArrayList<>();
-        lstMessages.add(new Message("system","you are helpful assistent, on a videogame site"));
-        lstMessages.add(new Message("user",message.getContent())); //Bruger input
+        lstMessages.add(new Message
+                ("system","you are helpful assistent, on a videogame site. " +
+                        "Be precise and short. Include Game info in this format Genre:, short Description:, Release date:, Platform:"));
+        lstMessages.add(new Message("user",message.getContent())); // bruger input
 
         requestDTO.setMessages(lstMessages);
 
