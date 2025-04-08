@@ -26,6 +26,12 @@ public class Message {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
+    public Message(String role, String content) {
+        this.role = role;
+        this.content = content;
+    }
+    public Message() {}
+
     @JsonProperty("role")
     public String getRole() {
         return role;
