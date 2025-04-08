@@ -17,8 +17,11 @@ public class RawgService {
 
     WebClient webClient;
 
-    public RawgService(WebClient.Builder webClient) {
+    //CheapSharkService cheapSharkService;
+
+    public RawgService(WebClient.Builder webClient/*, CheapSharkService service*/) {
         this.webClient = webClient.build();
+        //this.cheapSharkService = service;
     }
 
     @Value("${api.key}")
@@ -44,12 +47,21 @@ public class RawgService {
         List<GameInfo> gameInfos = getRawgGame(games);
         List<RecomandationDto> recomandations = new ArrayList<>();
 
+
         for(GameInfo gameInfo : gameInfos) {
+
+            //List<SimplifiedCheapSharkDTO> cheapSharkData = cheapSharkService.
+            //List<String> storeNames = new Arraylist<>();
+            //List<Object> prices = new ArrayList<>();
+            //for(SimplifiedCheapSharkDTO Csdto : cheapSharkData){
+            //    storeNames.add(Csdto.getStoreName());
+            //    prices.add(Csdto.getPrice());
+            //}
             //Toby service metode til id
             //Toby service metode til deals
             //Service metode til storeNames
             RecomandationDto recomandation = new RecomandationDto();
-            recomandation.setDescription(gameInfo.getDescription());
+            recomandation.setDescription(gameInfo.getDescriptionRaw());
             recomandation.setName(gameInfo.getName());
             recomandation.setPicture(gameInfo.getBackgroundImage());
             //Laver en Liste her så vi kun få genre navn med og ikke resten af tingene i objektet.
@@ -65,8 +77,8 @@ public class RawgService {
                 platforms.add(platform.getPlatform().getName());
             }
             recomandation.setPlatform(platforms);
-            //recomandation.setDealList();
-            //recomandation.setStorenames();
+            //recomandation.setDealList(prices);
+            //recomandation.setStorenames(storeNames);
             recomandations.add(recomandation);
         }
         return recomandations;
