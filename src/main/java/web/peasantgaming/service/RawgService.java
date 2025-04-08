@@ -1,9 +1,12 @@
 package web.peasantgaming.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import web.peasantgaming.dto.rawg.GameInfo;
+import web.peasantgaming.dto.rawg.Genre;
+import web.peasantgaming.dto.rawg.ParentPlatform;
 import web.peasantgaming.dto.reccomandation.RecomandationDto;
 
 import java.util.ArrayList;
@@ -18,7 +21,8 @@ public class RawgService {
         this.webClient = webClient.build();
     }
 
-    String api_key = "9086de6197a5495e9f1d60fa0725534b";
+    @Value("${api.key}")
+    String api_key;
 
     public List<GameInfo> getRawgGame(List<String> games){
 
@@ -48,8 +52,19 @@ public class RawgService {
             recomandation.setDescription(gameInfo.getDescription());
             recomandation.setName(gameInfo.getName());
             recomandation.setPicture(gameInfo.getBackgroundImage());
-            recomandation.setGenre(gameInfo.getGenres());
-            recomandation.setPlatform(gameInfo.getParentPlatforms());
+            //Laver en Liste her så vi kun få genre navn med og ikke resten af tingene i objektet.
+            List<String> genres = new ArrayList<>();
+            for(Genre genre : gameInfo.getGenres()){
+                genres.add(genre.getName());
+            }
+            recomandation.setGenre(genres);
+
+            //gør det samme som med genre her, så vi slipper for det i frontend.
+            List<String> platforms = new ArrayList<>();
+            for(ParentPlatform platform : gameInfo.getParentPlatforms()){
+                platforms.add(platform.getPlatform().getName());
+            }
+            recomandation.setPlatform(platforms);
             //recomandation.setDealList();
             //recomandation.setStorenames();
             recomandations.add(recomandation);

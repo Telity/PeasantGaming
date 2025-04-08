@@ -9,16 +9,16 @@ import java.util.List;
 public class RecomandationDto {
 
     private String name;
-    private List<Genre> genre;
+    private List<String> genre;
     private List<Object> dealList; // put deal på når toby har lavet det.
     private String picture;
     private String description;
-    private List<ParentPlatform> platform;
+    private List<String> platform;
     private List<String> storenames;
 
     public RecomandationDto() {}
 
-    public RecomandationDto(String name,List<Genre> genre,List<Object> dealList,String picture,String description,List<ParentPlatform> platform,List<String> storenames) {
+    public RecomandationDto(String name,List<String> genre,List<Object> dealList,String picture,String description,List<String> platform,List<String> storenames) {
         this.name = name;
         this.genre = genre;
         this.dealList = dealList;
@@ -36,11 +36,11 @@ public class RecomandationDto {
         this.name = name;
     }
 
-    public List<Genre> getGenre() {
+    public List<String> getGenre() {
         return genre;
     }
 
-    public void setGenre(List<Genre> genre) {
+    public void setGenre(List<String> genre) {
         this.genre = genre;
     }
 
@@ -68,11 +68,11 @@ public class RecomandationDto {
         this.description = description;
     }
 
-    public List<ParentPlatform> getPlatform() {
+    public List<String> getPlatform() {
         return platform;
     }
 
-    public void setPlatform(List<ParentPlatform> platform) {
+    public void setPlatform(List<String> platform) {
         this.platform = platform;
     }
 
