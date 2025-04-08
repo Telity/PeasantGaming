@@ -37,36 +37,23 @@ public class CheapSharkService {
         return null;
     }
 
-//    public Mono<Map<String, String>> getActivesStoresMap(){
-//        return webClient.get()
-//                .uri("/stores")
-//                .retrieve()
-//                .bodyToFlux(StoreInfo.class)
-//                .filter(store -> store.getIsActive() == 1)
-//                .collectMap(StoreInfo::getStoreID, StoreInfo::getStoreName);
-//    }
 
-    public String getCheapSharkStoreNameFromStoreId(String storeId){
-        StoreInfo storename = webClient.get()
-    }
+    public List<SimplifiedCheapSharkDTO> get5CheapestStoresByTitel(String title){
 
-    public List<SimplifiedCheapSharkDTO> get5CheapestStoresByTitel(String titel){
-
-        String gameId = getCheapSharkIdFromTitel(titel);
+        String gameId = getCheapSharkIdFromTitel(title);
         if(gameId == null){
             return Collections.emptyList();
         }
 
-        StoreInfo[] stores = webClient.get()
+        StoreInfo[] allStores = webClient.get()
                 .uri("/stores")
                 .retrieve()
                 .bodyToMono(StoreInfo[].class)
                 .block();
 
-        Set<String> activeStoreIds = Arrays.stream(stores)
-                .filter(s -> s.getIsActive() != null && s.getIsActive() == 1)
-                .map(StoreInfo::getStoreID)
-                .collect(Collectors.toSet());
+        Map<String, String> activeStoreMap = Arrays.stream(allStores)
+                .filter(store -> store.getIsActive() != null && store.getIsActive() == 1)
+                .collect(Collectors.toMap(StoreInfo::getStoreID, StoreInfo::getStoreName));
 
         SharkDTO sharkDTO = webClient.get()
                 .uri(uriBuilder -> uriBuilder
@@ -83,25 +70,17 @@ public class CheapSharkService {
         }
 
         List<Deal> cheapestDeals= sharkDTO.getDeals().stream()
-                .filter(deal -> activeStoreIds.contains(deal.getStoreID()))
+                .filter(deal -> activeStoreMap.containsKey(deal.getStoreID()))
                 .sorted(Comparator.comparingDouble(deal -> Double.parseDouble(deal.getPrice())))
                 .limit(5)
                 .toList();
 
-        return
-
-//        Mono<List<StoreInfo>> stores = webClient.get()
-//                .uri("/stores")
-//                .retrieve()
-//                .bodyToFlux(StoreInfo.class)
-//                .collectList();
-//
-//
-//        Mono<String> specificGameID = webClient.get()
-//                .uri("games?id=" + gameId)
-//                .retrieve()
-//                .bodyToMono(String.class);
-
-
+        return cheapestDeals.stream()
+                .map(deal -> new SimplifiedCheapSharkDTO(
+                        title,
+                        activeStoreMap.get(deal.getStoreID()),
+                        deal.getPrice()
+                ))
+                .collect(Collectors.toList());
     }
 }
