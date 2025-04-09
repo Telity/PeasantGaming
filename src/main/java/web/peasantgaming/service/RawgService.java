@@ -24,7 +24,7 @@ public class RawgService {
         //this.cheapSharkService = service;
     }
 
-    @Value("${api.key}")
+    @Value("${rawg.api.key1}")
     String api_key;
 
     public List<GameInfoDto> getRawgGame(List<String> games){
