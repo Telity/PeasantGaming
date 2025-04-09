@@ -5,27 +5,26 @@ import web.peasantgaming.dto.rawg.ParentPlatform;
 import web.peasantgaming.dto.rawg.Platform;
 
 import java.util.List;
+import java.util.Map;
 
 public class RecomandationDto {
 
     private String name;
     private List<String> genre;
-    private List<Object> dealList; // put deal på når toby har lavet det.
+    private Map<String,String> dealList; //
     private String picture;
     private String description;
     private List<String> platform;
-    private List<String> storeNames;
 
     public RecomandationDto() {}
 
-    public RecomandationDto(String name,List<String> genre,List<Object> dealList,String picture,String description,List<String> platform,List<String> storenames) {
+    public RecomandationDto(String name,List<String> genre,Map<String,String> dealList,String picture,String description,List<String> platform) {
         this.name = name;
         this.genre = genre;
         this.dealList = dealList;
         this.picture = picture;
         this.description = description;
         this.platform = platform;
-        this.storeNames = storeNames;
     }
 
     public String getName() {
@@ -44,11 +43,11 @@ public class RecomandationDto {
         this.genre = genre;
     }
 
-    public List<Object> getDealList() {
+    public Map<String,String> getDealList() {
         return dealList;
     }
 
-    public void setDealList(List<Object> dealList) {
+    public void setDealList(Map<String,String> dealList) {
         this.dealList = dealList;
     }
 
@@ -74,13 +73,5 @@ public class RecomandationDto {
 
     public void setPlatform(List<String> platform) {
         this.platform = platform;
-    }
-
-    public List<String> getStoreNames() {
-        return storeNames;
-    }
-
-    public void setStoreNames(List<String> storeNames) {
-        this.storeNames = storeNames;
     }
 }

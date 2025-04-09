@@ -78,8 +78,8 @@ public class CheapSharkService {
         return cheapestDeals.stream()
                 .map(deal -> new SimplifiedCheapSharkDTO(
                         title,
-                        activeStoreMap.get(deal.getStoreID()),
-                        deal.getPrice()
+                        deal.getPrice(),
+                        activeStoreMap.get(deal.getStoreID())
                 ))
                 .collect(Collectors.toList());
     }

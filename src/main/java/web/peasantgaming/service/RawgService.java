@@ -4,24 +4,27 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import web.peasantgaming.dto.cheapshark.SimplifiedCheapSharkDTO;
 import web.peasantgaming.dto.rawg.GameInfoDto;
 import web.peasantgaming.dto.rawg.Genre;
 import web.peasantgaming.dto.rawg.ParentPlatform;
 import web.peasantgaming.dto.reccomandation.RecomandationDto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RawgService {
 
     WebClient webClient;
 
-    //CheapSharkService cheapSharkService;
+    CheapSharkService cheapSharkService;
 
-    public RawgService(WebClient.Builder webClient/*, CheapSharkService service*/) {
+    public RawgService(WebClient.Builder webClient, CheapSharkService service) {
         this.webClient = webClient.build();
-        //this.cheapSharkService = service;
+        this.cheapSharkService = service;
     }
 
     @Value("${rawg.api.key1}")
@@ -50,16 +53,12 @@ public class RawgService {
 
         for(GameInfoDto gameInfo : gameInfos) {
 
-            //List<SimplifiedCheapSharkDTO> cheapSharkData = cheapSharkService.
-            //List<String> storeNames = new Arraylist<>();
-            //List<Object> prices = new ArrayList<>();
-            //for(SimplifiedCheapSharkDTO Csdto : cheapSharkData){
-            //    storeNames.add(Csdto.getStoreName());
-            //    prices.add(Csdto.getPrice());
-            //}
-            //Toby service metode til id
-            //Toby service metode til deals
-            //Service metode til storeNames
+            List<SimplifiedCheapSharkDTO> cheapSharkData = cheapSharkService.get5CheapestStoresByTitle(gameInfo.getName());
+            Map<String,String> dealInfo = new HashMap<>();
+            for(SimplifiedCheapSharkDTO Csdto : cheapSharkData){
+                dealInfo.put(Csdto.getStoreName(),Csdto.getPrice());
+            }
+
             RecomandationDto recomandation = new RecomandationDto();
             recomandation.setDescription(gameInfo.getDescriptionRaw());
             recomandation.setName(gameInfo.getName());
@@ -77,8 +76,7 @@ public class RawgService {
                 platforms.add(platform.getPlatform().getName());
             }
             recomandation.setPlatform(platforms);
-            //recomandation.setDealList(prices);
-            //recomandation.setStorenames(storeNames);
+            recomandation.setDealList(dealInfo);
             recomandations.add(recomandation);
         }
         return recomandations;
