@@ -14,7 +14,7 @@ public class RecomandationDto {
     private String picture;
     private String description;
     private List<String> platform;
-    private List<String> storenames;
+    private List<String> storeNames;
 
     public RecomandationDto() {}
 
@@ -25,7 +25,7 @@ public class RecomandationDto {
         this.picture = picture;
         this.description = description;
         this.platform = platform;
-        this.storenames = storenames;
+        this.storeNames = storeNames;
     }
 
     public String getName() {
@@ -76,11 +76,11 @@ public class RecomandationDto {
         this.platform = platform;
     }
 
-    public List<String> getStorenames() {
-        return storenames;
+    public List<String> getStoreNames() {
+        return storeNames;
     }
 
-    public void setStorenames(List<String> storenames) {
-        this.storenames = storenames;
+    public void setStoreNames(List<String> storeNames) {
+        this.storeNames = storeNames;
     }
 }
