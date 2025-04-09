@@ -13,6 +13,8 @@ public class SimplifiedCheapSharkDTO {
         this.storeName = storeName;
     }
 
+    public SimplifiedCheapSharkDTO(){}
+
     public String getTitel() {
         return titel;
     }

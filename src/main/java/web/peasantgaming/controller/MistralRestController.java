@@ -17,7 +17,7 @@ public class MistralRestController {
     @Autowired
     MistralService mistralService;
 
-    @PostMapping("/mistralChoice")
+    @GetMapping("/mistralChoice")
     public ResponseEntity<List<RecomandationDto>> postContent(){
         Message message = new Message();
         Scanner scanner = new Scanner(System.in);

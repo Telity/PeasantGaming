@@ -3,6 +3,7 @@ package web.peasantgaming.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 import web.peasantgaming.dto.cheapshark.SimplifiedCheapSharkDTO;
 import web.peasantgaming.dto.rawg.GameInfoDto;
@@ -35,11 +36,18 @@ public class RawgService {
         List<GameInfoDto> rawgGames = new ArrayList<>();
 
         for(String game : games) {
-            Mono<GameInfoDto> gameInfo = webClient.get()
-                    .uri("https://api.rawg.io/api/games/" + game + "?key=" + api_key)
-                    .retrieve()
-                    .bodyToMono(GameInfoDto.class);
-            rawgGames.add(gameInfo.block());
+            try {
+                Mono<GameInfoDto> gameInfo = webClient.get()
+                        .uri("https://api.rawg.io/api/games/" + game.trim() + "?key=" + api_key)
+                        .retrieve()
+                        .bodyToMono(GameInfoDto.class);
+                rawgGames.add(gameInfo.block());
+            }
+            catch(WebClientResponseException e){
+                e.printStackTrace();
+                System.out.println("No game found with title" + game.trim());
+                continue;
+            }
         }
 
         return rawgGames;
@@ -76,7 +84,18 @@ public class RawgService {
                 platforms.add(platform.getPlatform().getName());
             }
             recomandation.setPlatform(platforms);
-            recomandation.setDealList(dealInfo);
+
+            if(dealInfo.isEmpty()){
+                SimplifiedCheapSharkDTO raw = new SimplifiedCheapSharkDTO();
+                if(!gameInfo.getStores().isEmpty()) {
+                    raw.setStoreName(gameInfo.getStores().get(0).getStore().getName());
+                }
+                dealInfo.put(raw.getStoreName(), raw.getStoreName());
+                recomandation.setDealList(dealInfo);
+            }
+            else {
+                recomandation.setDealList(dealInfo);
+            }
             recomandations.add(recomandation);
         }
         return recomandations;
