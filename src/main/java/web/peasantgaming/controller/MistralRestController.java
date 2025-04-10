@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @RestController
+@CrossOrigin("*")
 public class MistralRestController {
 
     @Autowired
