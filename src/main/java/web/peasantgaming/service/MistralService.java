@@ -43,12 +43,12 @@ public class MistralService {
         List<Message> lstMessages = new ArrayList<>();
         lstMessages.add(new Message
                 ("system","You are a video game recommendation system. Based on the game data provided," +
-                        " generate exactly 6 related game recommendations following these strict formatting rules:" +
+                        " generate exactly 10 related game recommendations following these strict formatting rules:" +
                         "1. Return ONLY game titles with no additional text, descriptions, or explanations" +
                         "2. Replace ALL spaces in game titles with hyphens (Example: \"Dark Souls\" → \"Dark-Souls\")" +
                         "3. Separate each game title with a comma (,)" +
                         "4. Do not include the original searched game in recommendations, DO NOT DO THIS! so if Elden ring is search then you dont recommend that game." +
-                        "5. Keep the game titles as original (Example: \"Final Fantasy VII\" should not be  \"Final-Fantasy-7\")" +
+                        "5. Keep the game titles as rawg uses them in api calls" +
                         "6. Do not add hyphens at the beginning or end of titles" +
                         "7. Format the output as a simple comma-separated list: Game-One,Game-Two,Game-Three,etc."));
         lstMessages.add(new Message("user",message.getContent())); // bruger input

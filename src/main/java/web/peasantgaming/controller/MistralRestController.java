@@ -7,7 +7,9 @@ import web.peasantgaming.dto.reccomandation.RecomandationDto;
 import web.peasantgaming.dto.request.Message;
 import web.peasantgaming.dto.response.Choice;
 import web.peasantgaming.service.MistralService;
+import web.peasantgaming.service.RawgService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,18 +17,32 @@ import java.util.Scanner;
 @CrossOrigin("*")
 public class MistralRestController {
 
-    @Autowired
+
     MistralService mistralService;
 
-    @GetMapping("/mistralChoice")
-    public ResponseEntity<List<RecomandationDto>> postContent(){
+    RawgService rawgService;
+
+    public MistralRestController(MistralService mistralService, RawgService rawgService) {
+        this.mistralService = mistralService;
+        this.rawgService = rawgService;
+    }
+
+    @PostMapping("/mistralChoice")
+    public ResponseEntity<List<RecomandationDto>> postContent(@RequestBody String content) {
         Message message = new Message();
-        Scanner scanner = new Scanner(System.in);
-        message.setContent(scanner.nextLine());
+        System.out.println(content);
+        message.setContent(content);
         List<RecomandationDto> choice = mistralService.getChoice(message);
 
         return ResponseEntity.ok().body(choice);
     }
 
+    @PostMapping("/singleGame")
+    public ResponseEntity<List<RecomandationDto>> getSingleGame(@RequestBody String content) {
+        List<String> game = new ArrayList<>();
+        game.add(content);
+
+        return ResponseEntity.ok(rawgService.recomandations(game));
+    }
 
 }

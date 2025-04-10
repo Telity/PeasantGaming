@@ -34,22 +34,33 @@ public class RawgService {
     public List<GameInfoDto> getRawgGame(List<String> games){
 
         List<GameInfoDto> rawgGames = new ArrayList<>();
-
-        for(String game : games) {
+        if(games.size()>1) {
+            for (String game : games) {
+                try {
+                    Mono<GameInfoDto> gameInfo = webClient.get()
+                            .uri("https://api.rawg.io/api/games/" + game.trim() + "?key=" + api_key)
+                            .retrieve()
+                            .bodyToMono(GameInfoDto.class);
+                    rawgGames.add(gameInfo.block());
+                } catch (WebClientResponseException e) {
+                    e.printStackTrace();
+                    System.out.println("No game found with title" + game.trim());
+                    continue;
+                }
+            }
+        }
+        else{
             try {
                 Mono<GameInfoDto> gameInfo = webClient.get()
-                        .uri("https://api.rawg.io/api/games/" + game.trim() + "?key=" + api_key)
+                        .uri("https://api.rawg.io/api/games/" + games.get(0).trim() + "?key=" + api_key)
                         .retrieve()
                         .bodyToMono(GameInfoDto.class);
                 rawgGames.add(gameInfo.block());
-            }
-            catch(WebClientResponseException e){
+            } catch (WebClientResponseException e) {
                 e.printStackTrace();
-                System.out.println("No game found with title" + game.trim());
-                continue;
+                System.out.println("No game found with title" + games.get(0).trim());
             }
         }
-
         return rawgGames;
     }
 
