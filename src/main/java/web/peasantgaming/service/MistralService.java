@@ -80,5 +80,45 @@ public class MistralService {
         return rawgService.recomandations(gameResponseList);
     }
 
+    public List<RecomandationDto> getSingleGame(List<String> game) {
+        List<String> gameResponseList = new ArrayList<>();
+        try {
+            RequestDTO requestDTO = new RequestDTO();
+            requestDTO.setModel("mistral-small-latest");
+            requestDTO.setTemperature(1.0);
+            requestDTO.setMaxTokens(400);
+
+            List<Message> lstMessages = new ArrayList<>();
+            lstMessages.add(new Message
+                    ("system","You are a video game title cleaner Based titel you get make it clean based on these rules," +
+                            " give me back the game title following these strict formatting rules:" +
+                            "1. Return ONLY game titles with no additional text, descriptions, or explanations" +
+                            "2. Replace ALL spaces in game titles with hyphens (Example: \"Dark Souls\" → \"Dark-Souls\")" +
+                            "5. Keep the game titles as rawg uses them in api calls"));
+            lstMessages.add(new Message("user", game.get(0))); // bruger input
+
+            requestDTO.setMessages(lstMessages);
+
+
+            ResponseDTO responseDTO = webClient.post()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBearerAuth(mistralApiKey))
+                    .bodyValue(requestDTO)
+                    .retrieve().bodyToMono(ResponseDTO.class)
+                    .block();
+
+            if(responseDTO != null) {
+                List<Choice> choices = responseDTO.getChoices();
+                String hello = responseDTO.getChoices().get(0).getMessage().getContent();
+                gameResponseList.add(hello);
+                System.out.println(gameResponseList);
+            }
+
+        }catch (Exception e){
+            e.getMessage();
+            System.out.println("please enter game description again");
+        }
+        return rawgService.recomandations(gameResponseList);
+    }
 
 }

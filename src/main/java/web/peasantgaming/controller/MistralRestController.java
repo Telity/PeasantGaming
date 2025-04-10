@@ -41,8 +41,9 @@ public class MistralRestController {
     public ResponseEntity<List<RecomandationDto>> getSingleGame(@RequestBody String content) {
         List<String> game = new ArrayList<>();
         game.add(content);
+        System.out.println(game);
 
-        return ResponseEntity.ok(rawgService.recomandations(game));
+        return ResponseEntity.ok(mistralService.getSingleGame(game));
     }
 
 }
