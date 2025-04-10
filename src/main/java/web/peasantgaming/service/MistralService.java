@@ -41,16 +41,20 @@ public class MistralService {
         requestDTO.setMaxTokens(400);
 
         List<Message> lstMessages = new ArrayList<>();
-        lstMessages.add(new Message
-                ("system","You are a video game recommendation system. Based on the game data provided," +
-                        " generate exactly 10 related game recommendations following these strict formatting rules:" +
-                        "1. Return ONLY game titles with no additional text, descriptions, or explanations" +
-                        "2. Replace ALL spaces in game titles with hyphens (Example: \"Dark Souls\" → \"Dark-Souls\")" +
-                        "3. Separate each game title with a comma (,)" +
-                        "4. Do not include the original searched game in recommendations, DO NOT DO THIS! so if Elden ring is search then you dont recommend that game." +
-                        "5. Keep the game titles as rawg uses them in api calls" +
-                        "6. Do not add hyphens at the beginning or end of titles" +
-                        "7. Format the output as a simple comma-separated list: Game-One,Game-Two,Game-Three,etc."));
+        lstMessages.add(new Message(
+                "system",
+                "You are a video game recommendation system. Given the provided game title, generate **exactly 6 related game recommendations** with the following rules. Do **not** deviate from these instructions under any circumstances:\n" +
+                        "1. Return **exactly 12 game titles**. Do **not** return fewer than 6 titles.\n" +
+                        "2. Only output the game titles—**no extra text, descriptions, or explanations**.\n" +
+                        "3. For each game title, replace **all spaces with hyphens**. Example: 'Dark Souls' → 'Dark-Souls'.\n" +
+                        "4. **Separate each game title with a single comma**, with **no spaces before or after commas**. Example: 'Game-One,Game-Two,Game-Three'.\n" +
+                        "5. **Do not include the original game** in your recommendations. For example, if the input is 'Elden Ring', do **not** recommend 'Elden-Ring'.\n" +
+                        "6. Keep game titles **exactly as they are**, with **no alterations** (e.g., 'Final Fantasy VII' should not be 'Final-Fantasy-7').\n" +
+                        "7. **Do not add hyphens at the beginning or end** of any title.\n" +
+                        "8. If no games can be recommended, return 'No recommendations available.'\n" +
+                        "9. Output should be **only one line** in a **comma-separated format** (no line breaks, bullet points, or extra formatting).\n" +
+                        "10. **Do not include any special characters in the game titles**. For example, if a game has characters like é, ñ, or ç, convert them to their closest ASCII equivalent (e.g., 'Pokémon' → 'Pokemon').\n"
+                ));
         lstMessages.add(new Message("user",message.getContent())); // bruger input
 
         requestDTO.setMessages(lstMessages);
