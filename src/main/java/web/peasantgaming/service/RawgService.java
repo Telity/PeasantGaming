@@ -6,15 +6,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 import web.peasantgaming.dto.cheapshark.SimplifiedCheapSharkDTO;
-import web.peasantgaming.dto.rawg.GameInfoDto;
-import web.peasantgaming.dto.rawg.Genre;
-import web.peasantgaming.dto.rawg.ParentPlatform;
+import web.peasantgaming.dto.rawg.*;
 import web.peasantgaming.dto.reccomandation.RecomandationDto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class RawgService {
@@ -115,6 +114,31 @@ public class RawgService {
             recomandations.add(recomandation);
         }
         return recomandations;
+    }
+
+    public List<String> getGenres(){
+
+        List<String> genres = new ArrayList<>();
+
+        Mono<GenreWithResults> gameGenres= webClient.get()
+                .uri("https://api.rawg.io/api/genres?key=" + api_key)
+                .retrieve()
+                .bodyToMono(GenreWithResults.class);
+        genres = gameGenres.block().getResults().stream().map(Genre::getName).toList();
+
+        return genres;
+    }
+
+    public List<String> getPlatforms(){
+        List<String> platforms = new ArrayList<>();
+
+        Mono<PlatformWithLstOfPlatforms> monoPlatforms = webClient.get()
+                .uri("https://api.rawg.io/api/platforms?key=" + api_key)
+                .retrieve()
+                .bodyToMono(PlatformWithLstOfPlatforms.class);
+
+        platforms = monoPlatforms.block().getResults().stream().map(PlatformResults::getName).toList();
+        return platforms;
     }
 
 }
