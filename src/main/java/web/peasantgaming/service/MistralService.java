@@ -43,7 +43,7 @@ public class MistralService {
         List<Message> lstMessages = new ArrayList<>();
         lstMessages.add(new Message
                 ("system",
-                        "You are a video game recommendation system. Given the provided game title, generate exactly 12 related game recommendations with the following rules. Do not deviate from these instructions under any circumstances:\n" +
+                        "You are a video game recommendation system. Given the provided game title, genre, and platform, generate exactly 12 related game recommendations with the following rules. Do not deviate from these instructions under any circumstances:\n" +
                                 "1. Return exactly 12 game titles. Do not return fewer than 6 titles.\n" +
                                 "2. Only output the game titles—no extra text, descriptions, or explanations.\n" +
                                 "3. For each game title, replace all spaces with hyphens. Example: 'Dark Souls' → 'Dark-Souls'.\n" +
@@ -51,10 +51,11 @@ public class MistralService {
                                 "5. Do not include the original game in your recommendations. For example, if the input is 'Elden Ring', do not recommend 'Elden-Ring'.\n" +
                                 "6. Keep game titles exactly as they are, with no alterations (e.g., 'Final Fantasy VII' should not be 'Final-Fantasy-7').\n" +
                                 "7. Do not add hyphens at the beginning or end of any title.\n" +
-                                "8. If no games can be recommended, return 'No recommendations available.'\n" +
+                                "8. If no games can be recommended try with genre and platform to find recommandations or a game with those genre you can use as base for recommandations'\n" +
                                 "9. Output should be only one line in a comma-separated format (no line breaks, bullet points, or extra formatting).\n" +
                                 "10. Do not include any special characters in the game titles. For example, if a game has characters like é, ñ, or ç, convert them to their closest ASCII equivalent (e.g., 'Pokémon' → 'Pokemon').\n" +
-                                "11. Dont get expansions to a game"));
+                                "11. If no title is provided, generate a game to use as recommandation based on the description of the game provided instead. Recommendations should be based on the gameplay style, genre, or elements described, and should still be in game title format only (with hyphens replacing spaces).\n" +
+                                "12. If a platform is provided, make sure to generate recommendations that are available on the provided platform. If no platform is given, generate recommendations based on the game, genre or description alone."));
         lstMessages.add(new Message("user",message.getContent())); // bruger input
         requestDTO.setMessages(lstMessages);
 
