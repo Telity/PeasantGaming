@@ -1,5 +1,5 @@
 
-package web.peasantgaming.dto;
+package web.peasantgaming.dto.cheapshark;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,24 +13,50 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "platform"
+    "banner",
+    "logo",
+    "icon"
 })
 @Generated("jsonschema2pojo")
-public class ParentPlatform {
+public class Images {
 
-    @JsonProperty("platform")
-    private Platform platform;
+    @JsonProperty("banner")
+    private String banner;
+    @JsonProperty("logo")
+    private String logo;
+    @JsonProperty("icon")
+    private String icon;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
-    @JsonProperty("platform")
-    public Platform getPlatform() {
-        return platform;
+    @JsonProperty("banner")
+    public String getBanner() {
+        return banner;
     }
 
-    @JsonProperty("platform")
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
+    @JsonProperty("banner")
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
+
+    @JsonProperty("logo")
+    public String getLogo() {
+        return logo;
+    }
+
+    @JsonProperty("logo")
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    @JsonProperty("icon")
+    public String getIcon() {
+        return icon;
+    }
+
+    @JsonProperty("icon")
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     @JsonAnyGetter

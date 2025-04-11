@@ -1,5 +1,5 @@
 
-package web.peasantgaming.dto;
+package web.peasantgaming.dto.rawg;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

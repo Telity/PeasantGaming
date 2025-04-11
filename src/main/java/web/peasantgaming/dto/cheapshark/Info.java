@@ -1,5 +1,5 @@
 
-package web.peasantgaming.dto;
+package web.peasantgaming.dto.cheapshark;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,34 +13,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "id",
     "title",
-    "count",
-    "percent"
+    "steamAppID",
+    "thumb"
 })
 @Generated("jsonschema2pojo")
-public class Rating {
+public class Info {
 
-    @JsonProperty("id")
-    private Integer id;
     @JsonProperty("title")
     private String title;
-    @JsonProperty("count")
-    private Integer count;
-    @JsonProperty("percent")
-    private Double percent;
+    @JsonProperty("steamAppID")
+    private String steamAppID;
+    @JsonProperty("thumb")
+    private String thumb;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
-
-    @JsonProperty("id")
-    public Integer getId() {
-        return id;
-    }
-
-    @JsonProperty("id")
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     @JsonProperty("title")
     public String getTitle() {
@@ -52,24 +39,24 @@ public class Rating {
         this.title = title;
     }
 
-    @JsonProperty("count")
-    public Integer getCount() {
-        return count;
+    @JsonProperty("steamAppID")
+    public String getSteamAppID() {
+        return steamAppID;
     }
 
-    @JsonProperty("count")
-    public void setCount(Integer count) {
-        this.count = count;
+    @JsonProperty("steamAppID")
+    public void setSteamAppID(String steamAppID) {
+        this.steamAppID = steamAppID;
     }
 
-    @JsonProperty("percent")
-    public Double getPercent() {
-        return percent;
+    @JsonProperty("thumb")
+    public String getThumb() {
+        return thumb;
     }
 
-    @JsonProperty("percent")
-    public void setPercent(Double percent) {
-        this.percent = percent;
+    @JsonProperty("thumb")
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 
     @JsonAnyGetter

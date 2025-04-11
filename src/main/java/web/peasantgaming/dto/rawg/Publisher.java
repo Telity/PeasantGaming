@@ -1,5 +1,5 @@
 
-package web.peasantgaming.dto;
+package web.peasantgaming.dto.rawg;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,12 +16,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "name",
     "slug",
-    "language",
     "games_count",
     "image_background"
 })
 @Generated("jsonschema2pojo")
-public class Tag {
+public class Publisher {
 
     @JsonProperty("id")
     private Integer id;
@@ -29,8 +28,6 @@ public class Tag {
     private String name;
     @JsonProperty("slug")
     private String slug;
-    @JsonProperty("language")
-    private String language;
     @JsonProperty("games_count")
     private Integer gamesCount;
     @JsonProperty("image_background")
@@ -66,16 +63,6 @@ public class Tag {
     @JsonProperty("slug")
     public void setSlug(String slug) {
         this.slug = slug;
-    }
-
-    @JsonProperty("language")
-    public String getLanguage() {
-        return language;
-    }
-
-    @JsonProperty("language")
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     @JsonProperty("games_count")

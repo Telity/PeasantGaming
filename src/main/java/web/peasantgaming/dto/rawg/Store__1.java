@@ -1,5 +1,5 @@
 
-package web.peasantgaming.dto;
+package web.peasantgaming.dto.rawg;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -15,10 +15,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "id",
     "name",
-    "slug"
+    "slug",
+    "domain",
+    "games_count",
+    "image_background"
 })
 @Generated("jsonschema2pojo")
-public class Platform {
+public class Store__1 {
 
     @JsonProperty("id")
     private Integer id;
@@ -26,6 +29,12 @@ public class Platform {
     private String name;
     @JsonProperty("slug")
     private String slug;
+    @JsonProperty("domain")
+    private String domain;
+    @JsonProperty("games_count")
+    private Integer gamesCount;
+    @JsonProperty("image_background")
+    private String imageBackground;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
@@ -57,6 +66,36 @@ public class Platform {
     @JsonProperty("slug")
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    @JsonProperty("domain")
+    public String getDomain() {
+        return domain;
+    }
+
+    @JsonProperty("domain")
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    @JsonProperty("games_count")
+    public Integer getGamesCount() {
+        return gamesCount;
+    }
+
+    @JsonProperty("games_count")
+    public void setGamesCount(Integer gamesCount) {
+        this.gamesCount = gamesCount;
+    }
+
+    @JsonProperty("image_background")
+    public String getImageBackground() {
+        return imageBackground;
+    }
+
+    @JsonProperty("image_background")
+    public void setImageBackground(String imageBackground) {
+        this.imageBackground = imageBackground;
     }
 
     @JsonAnyGetter

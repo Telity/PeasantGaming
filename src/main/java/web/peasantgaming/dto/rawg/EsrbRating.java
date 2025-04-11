@@ -1,5 +1,5 @@
+package web.peasantgaming.dto.rawg;
 
-package web.peasantgaming.dto;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,14 +13,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "id",
-    "name",
-    "slug",
-    "games_count",
-    "image_background"
+        "id",
+        "name",
+        "slug"
 })
 @Generated("jsonschema2pojo")
-public class Genre {
+public class EsrbRating {
 
     @JsonProperty("id")
     private Integer id;
@@ -28,10 +26,6 @@ public class Genre {
     private String name;
     @JsonProperty("slug")
     private String slug;
-    @JsonProperty("games_count")
-    private Integer gamesCount;
-    @JsonProperty("image_background")
-    private String imageBackground;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
@@ -65,26 +59,6 @@ public class Genre {
         this.slug = slug;
     }
 
-    @JsonProperty("games_count")
-    public Integer getGamesCount() {
-        return gamesCount;
-    }
-
-    @JsonProperty("games_count")
-    public void setGamesCount(Integer gamesCount) {
-        this.gamesCount = gamesCount;
-    }
-
-    @JsonProperty("image_background")
-    public String getImageBackground() {
-        return imageBackground;
-    }
-
-    @JsonProperty("image_background")
-    public void setImageBackground(String imageBackground) {
-        this.imageBackground = imageBackground;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -96,3 +70,4 @@ public class Genre {
     }
 
 }
+
