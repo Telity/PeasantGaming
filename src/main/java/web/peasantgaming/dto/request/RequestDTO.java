@@ -33,8 +33,8 @@ public class RequestDTO {
     private Integer maxTokens;
     @JsonProperty("presence_penalty")
     private Integer presencePenalty;
-//    @JsonIgnore
-//    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("model")
     public String getModel() {
@@ -86,14 +86,14 @@ public class RequestDTO {
         this.presencePenalty = presencePenalty;
     }
 
-//    @JsonAnyGetter
-//    public Map<String, Object> getAdditionalProperties() {
-//        return this.additionalProperties;
-//    }
-//
-//    @JsonAnySetter
-//    public void setAdditionalProperty(String name, Object value) {
-//        this.additionalProperties.put(name, value);
-//    }
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
 
 }
