@@ -75,7 +75,9 @@ public class RawgService {
             List<SimplifiedCheapSharkDTO> cheapSharkData = cheapSharkService.get5CheapestStoresByTitle(gameInfo.getName());
             Map<String,String> dealInfo = new HashMap<>();
             for(SimplifiedCheapSharkDTO Csdto : cheapSharkData){
-                dealInfo.put(Csdto.getStoreName(),Csdto.getPrice());
+                if(Csdto.getStoreName() != null) {
+                    dealInfo.put(Csdto.getStoreName(),Csdto.getPrice());
+                }
             }
 
             RecomandationDto recomandation = new RecomandationDto();
@@ -101,7 +103,10 @@ public class RawgService {
                 if(!gameInfo.getStores().isEmpty()) {
                     raw.setStoreName(gameInfo.getStores().get(0).getStore().getName());
                 }
-                dealInfo.put(raw.getStoreName(), raw.getStoreName());
+                String fallback = raw.getStoreName();
+                if(fallback != null) {
+                    dealInfo.put(raw.getStoreName(), raw.getStoreName());
+                }
                 recomandation.setDealList(dealInfo);
             }
             else {

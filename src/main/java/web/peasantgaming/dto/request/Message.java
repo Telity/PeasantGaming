@@ -23,8 +23,8 @@ public class Message {
     private String role;
     @JsonProperty("content")
     private String content;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+//    @JsonIgnore
+//    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     public Message(String role, String content) {
         this.role = role;
@@ -52,14 +52,14 @@ public class Message {
         this.content = content;
     }
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
+//    @JsonAnyGetter
+//    public Map<String, Object> getAdditionalProperties() {
+//        return this.additionalProperties;
+//    }
+//
+//    @JsonAnySetter
+//    public void setAdditionalProperty(String name, Object value) {
+//        this.additionalProperties.put(name, value);
+//    }
 
 }
